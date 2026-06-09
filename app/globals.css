@@ -1,74 +1,92 @@
 @import "tailwindcss";
 
 :root {
-  --primary: #8B2323;
-  --primary-dark: #6B1A1A;
-  --primary-light: #A83030;
-  --secondary: #5C7A2C;
-  --secondary-dark: #3D5219;
-  --accent: #B5581E;
-  --accent-light: #D4703A;
-  --cream: #F5EDD8;
-  --cream-dark: #EAD9B8;
-  --it-green: #009246;
-  --it-red: #CE2B37;
-  --dark: #120707;
-  --gray: #6B6B6B;
+  --primary:        #8B2323;
+  --primary-dark:   #6B1A1A;
+  --accent:         #B5581E;
+  --secondary:      #5C7A2C;
+  --cream:          #F5EDD8;
+  --cream-dark:     #EAD9B8;
+  --dark:           #0E0606;
+  --dark2:          #1A0A0A;
+  --gray:           #6B6B6B;
+  /* Itália */
+  --it-green:       #009246;
+  --it-red:         #CE2B37;
+  /* Brasil */
+  --br-green:       #009C3B;
+  --br-yellow:      #FFDF00;
+  --br-blue:        #002776;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-
 body {
-  font-family: 'Georgia', 'Times New Roman', serif;
-  background-color: var(--cream);
-  color: var(--dark);
+  font-family: 'Georgia', serif;
+  background-color: var(--dark);
+  color: var(--cream);
   line-height: 1.6;
   overflow-x: hidden;
 }
 
-/* ─── ITALY STRIPE ─── */
+/* ─── BANDEIRA ITÁLIA ─── */
 .stripe-italy {
   background: linear-gradient(90deg, var(--it-green) 33.33%, #fff 33.33%, #fff 66.66%, var(--it-red) 66.66%);
   height: 3px;
+}
+
+/* ─── BANDEIRA BRASIL ─── */
+.stripe-brasil {
+  background: linear-gradient(90deg, var(--br-green) 33.33%, var(--br-yellow) 33.33%, var(--br-yellow) 66.66%, var(--br-blue) 66.66%);
+  height: 3px;
+}
+
+/* ─── FAIXA DUPLA ITÁLIA + BRASIL ─── */
+.stripe-duo {
+  height: 6px;
+  background: linear-gradient(
+    90deg,
+    var(--it-green)  0%,    var(--it-green)  16.66%,
+    #ffffff          16.66%, #ffffff          33.33%,
+    var(--it-red)    33.33%, var(--it-red)    50%,
+    var(--br-green)  50%,    var(--br-green)  66.66%,
+    var(--br-yellow) 66.66%, var(--br-yellow) 83.33%,
+    var(--br-blue)   83.33%, var(--br-blue)   100%
+  );
 }
 
 /* ─── BUTTONS ─── */
 .btn-primary {
   display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
   background: var(--primary); color: #fff;
-  padding: 0.8rem 2rem; border-radius: 0.375rem;
+  padding: 0.875rem 2.25rem; border-radius: 0.375rem;
   font-weight: 700; font-family: system-ui, sans-serif;
-  font-size: 0.9rem; letter-spacing: 0.06em; text-transform: uppercase;
+  font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase;
   transition: all 0.25s cubic-bezier(.4,0,.2,1);
   border: 2px solid var(--primary); cursor: pointer; text-decoration: none;
   position: relative; overflow: hidden;
 }
-.btn-primary::after {
-  content: ''; position: absolute; inset: 0;
-  background: rgba(255,255,255,0.08);
-  transform: translateX(-100%); transition: transform 0.3s ease;
-}
+.btn-primary::after { content: ''; position: absolute; inset: 0; background: rgba(255,255,255,0.09); transform: translateX(-100%); transition: transform 0.3s ease; }
 .btn-primary:hover::after { transform: translateX(0); }
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(139,35,35,0.35); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(139,35,35,0.4); }
 
 .btn-ghost {
   display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
   background: transparent; color: #fff;
-  padding: 0.8rem 2rem; border-radius: 0.375rem;
+  padding: 0.875rem 2.25rem; border-radius: 0.375rem;
   font-weight: 700; font-family: system-ui, sans-serif;
-  font-size: 0.9rem; letter-spacing: 0.06em; text-transform: uppercase;
-  transition: all 0.25s ease;
-  border: 2px solid rgba(255,255,255,0.4); cursor: pointer; text-decoration: none;
+  font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase;
+  transition: all 0.25s ease; border: 2px solid rgba(255,255,255,0.35);
+  cursor: pointer; text-decoration: none;
 }
-.btn-ghost:hover { border-color: #fff; background: rgba(255,255,255,0.08); transform: translateY(-2px); }
+.btn-ghost:hover { border-color: #fff; background: rgba(255,255,255,0.07); transform: translateY(-2px); }
 
 .btn-secondary {
   display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
   background: transparent; color: var(--primary);
-  padding: 0.8rem 2rem; border-radius: 0.375rem;
+  padding: 0.875rem 2.25rem; border-radius: 0.375rem;
   font-weight: 700; font-family: system-ui, sans-serif;
-  font-size: 0.9rem; letter-spacing: 0.06em; text-transform: uppercase;
+  font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase;
   transition: all 0.25s ease; border: 2px solid var(--primary);
   cursor: pointer; text-decoration: none;
 }
@@ -77,63 +95,59 @@ body {
 .btn-green {
   display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
   background: var(--secondary); color: #fff;
-  padding: 0.8rem 2rem; border-radius: 0.375rem;
+  padding: 0.875rem 2.25rem; border-radius: 0.375rem;
   font-weight: 700; font-family: system-ui, sans-serif;
-  font-size: 0.9rem; letter-spacing: 0.06em; text-transform: uppercase;
+  font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase;
   transition: all 0.25s ease; border: none; cursor: pointer; text-decoration: none;
 }
-.btn-green:hover { background: var(--secondary-dark); transform: translateY(-2px); }
+.btn-green:hover { background: var(--secondary-dark, #3D5219); transform: translateY(-2px); }
 
-/* ─── CARDS ─── */
+/* ─── CARDS (admin/light bg) ─── */
 .card {
   background: #fff; border-radius: 0.75rem; overflow: hidden;
   box-shadow: 0 1px 3px rgba(18,7,7,0.06), 0 4px 16px rgba(18,7,7,0.04);
   transition: all 0.35s cubic-bezier(.4,0,.2,1);
 }
-.card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 4px 8px rgba(18,7,7,0.06), 0 20px 40px rgba(18,7,7,0.12);
-}
+.card:hover { transform: translateY(-4px); box-shadow: 0 4px 8px rgba(18,7,7,0.06), 0 16px 40px rgba(18,7,7,0.12); }
 
-/* ─── PREMIUM PRODUCT CARD ─── */
+/* ─── PRODUCT CARD ─── */
 .product-card {
-  background: #fff; border-radius: 1rem; overflow: hidden;
-  border: 1px solid rgba(234,217,184,0.6);
+  background: #1A0A0A; border-radius: 1rem; overflow: hidden;
+  border: 1px solid rgba(234,217,184,0.06);
   transition: all 0.35s cubic-bezier(.4,0,.2,1);
   position: relative;
 }
 .product-card::before {
-  content: ''; position: absolute; inset: 0;
-  border-radius: 1rem; border: 2px solid var(--primary);
-  opacity: 0; transition: opacity 0.3s ease; pointer-events: none; z-index: 1;
+  content: ''; position: absolute; inset: 0; border-radius: 1rem;
+  border: 1.5px solid var(--primary); opacity: 0; transition: opacity 0.3s ease; pointer-events: none; z-index: 1;
 }
 .product-card:hover::before { opacity: 1; }
-.product-card:hover { transform: translateY(-8px); box-shadow: 0 20px 60px rgba(139,35,35,0.15); }
+.product-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(139,35,35,0.2); }
 
 /* ─── TYPOGRAPHY ─── */
 .display-xl {
   font-family: 'Georgia', serif;
-  font-size: clamp(3.5rem, 8vw, 7rem);
-  line-height: 0.95;
-  letter-spacing: -0.02em;
+  font-size: clamp(3.5rem, 9vw, 8rem);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
   font-weight: 400;
 }
 .display-lg {
   font-family: 'Georgia', serif;
-  font-size: clamp(2.5rem, 5vw, 4.5rem);
-  line-height: 1.05;
-  letter-spacing: -0.01em;
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  line-height: 1.0;
+  letter-spacing: -0.02em;
 }
 .display-md {
   font-family: 'Georgia', serif;
-  font-size: clamp(1.75rem, 3vw, 2.5rem);
-  line-height: 1.15;
+  font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+  line-height: 1.1;
 }
 .eyebrow {
   font-family: system-ui, sans-serif;
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 700;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
 }
 
@@ -141,91 +155,75 @@ body {
 .badge {
   display: inline-flex; align-items: center; gap: 0.3rem;
   padding: 0.25rem 0.85rem; border-radius: 999px;
-  font-size: 0.72rem; font-weight: 700; font-family: system-ui, sans-serif;
+  font-size: 0.68rem; font-weight: 700; font-family: system-ui, sans-serif;
   letter-spacing: 0.08em; text-transform: uppercase;
 }
 .badge-green { background: rgba(92,122,44,0.12); color: var(--secondary); }
-.badge-red { background: rgba(139,35,35,0.1); color: var(--primary); }
-.badge-cream { background: rgba(245,237,216,0.2); color: #F5EDD8; border: 1px solid rgba(245,237,216,0.3); }
+.badge-red   { background: rgba(139,35,35,0.1);  color: var(--primary);   }
+.badge-cream { background: rgba(245,237,216,0.12); color: #F5EDD8; border: 1px solid rgba(245,237,216,0.2); }
 
 /* ─── INPUTS ─── */
 .input {
   width: 100%; padding: 0.875rem 1.125rem;
   border: 1.5px solid var(--cream-dark); border-radius: 0.5rem;
-  font-size: 1rem; font-family: system-ui, sans-serif;
+  font-size: 0.95rem; font-family: system-ui, sans-serif;
   background: #fff; transition: all 0.2s ease; outline: none; color: var(--dark);
 }
 .input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(139,35,35,0.08); }
-.label { display: block; font-size: 0.8rem; font-weight: 700; color: var(--dark); margin-bottom: 0.4rem; font-family: system-ui, sans-serif; letter-spacing: 0.04em; text-transform: uppercase; }
+.label {
+  display: block; font-size: 0.75rem; font-weight: 700; color: var(--dark);
+  margin-bottom: 0.4rem; font-family: system-ui, sans-serif;
+  letter-spacing: 0.05em; text-transform: uppercase;
+}
 
 /* ─── SCROLLBAR ─── */
 ::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: var(--cream); }
+::-webkit-scrollbar-track { background: var(--dark); }
 ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 3px; }
 
 /* ─── SECTION DIVIDER ─── */
-.section-divider {
-  width: 48px; height: 3px; background: var(--accent); border-radius: 2px; margin: 1.25rem 0;
-}
+.section-divider { width: 56px; height: 3px; background: var(--accent); border-radius: 2px; margin: 1.5rem 0; }
 .section-divider-center { margin-left: auto; margin-right: auto; }
+.section-divider-duo {
+  width: 80px; height: 4px; border-radius: 2px; margin: 1.5rem auto;
+  background: linear-gradient(90deg, var(--it-green) 33%, #fff 33%, #fff 66%, var(--it-red) 66%);
+}
 
 /* ─── HERO ─── */
-.hero-bg {
-  background: var(--dark);
-  position: relative;
-}
+.hero-bg { background: var(--dark); position: relative; }
 .hero-noise {
-  position: absolute; inset: 0; opacity: 0.04;
+  position: absolute; inset: 0; opacity: 0.035;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
 }
 
-/* ─── NUMBER COUNTER ─── */
-.stat-number {
-  font-family: 'Georgia', serif;
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  font-weight: 400;
-  line-height: 1;
-  color: var(--cream);
-}
+/* ─── STAT NUMBERS ─── */
+.stat-number { font-family: 'Georgia', serif; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 400; line-height: 1; color: var(--cream); }
 
 /* ─── MARQUEE ─── */
 @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-.marquee-track { display: flex; gap: 0; white-space: nowrap; animation: marquee 18s linear infinite; }
+.marquee-track { display: flex; gap: 0; white-space: nowrap; animation: marquee 24s linear infinite; }
 .marquee-track:hover { animation-play-state: paused; }
 
 /* ─── CART ─── */
-.cart-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 40; backdrop-filter: blur(4px); }
-.cart-sidebar { position: fixed; right: 0; top: 0; bottom: 0; width: 100%; max-width: 430px; background: #fff; z-index: 50; display: flex; flex-direction: column; box-shadow: -8px 0 40px rgba(0,0,0,0.2); }
+.cart-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.65); z-index: 40; backdrop-filter: blur(6px); }
+.cart-sidebar { position: fixed; right: 0; top: 0; bottom: 0; width: 100%; max-width: 430px; background: #fff; z-index: 50; display: flex; flex-direction: column; box-shadow: -8px 0 50px rgba(0,0,0,0.3); }
 
 /* ─── ANIMATIONS ─── */
-@keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-@keyframes scaleIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
-@keyframes floatY { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+@keyframes fadeUp   { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn   { from { opacity: 0; } to { opacity: 1; } }
+@keyframes scaleIn  { from { opacity: 0; transform: scale(0.94); } to { opacity: 1; transform: scale(1); } }
+@keyframes floatY   { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+@keyframes pulse    { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
+@keyframes shimmer  { from { background-position: -200% 0; } to { background-position: 200% 0; } }
 
-.anim-up { animation: fadeUp 0.6s ease forwards; }
-.anim-in { animation: fadeIn 0.5s ease forwards; }
-.anim-float { animation: floatY 4s ease-in-out infinite; }
+.anim-up    { animation: fadeUp  0.7s ease forwards; }
+.anim-in    { animation: fadeIn  0.5s ease forwards; }
+.anim-float { animation: floatY  4s ease-in-out infinite; }
 
-/* ─── IMAGE OVERLAY ─── */
-.img-overlay::after {
-  content: ''; position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(18,7,7,0.7) 0%, transparent 60%);
-}
+/* ─── DECORATIVE ─── */
+.deco-circle { border-radius: 50%; filter: blur(90px); position: absolute; pointer-events: none; }
+.deco-line   { width: 1px; background: rgba(245,237,216,0.12); position: absolute; }
 
-/* ─── DECORATIVE SHAPES ─── */
-.deco-circle {
-  border-radius: 50%;
-  background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
-  filter: blur(80px);
-  position: absolute;
-  pointer-events: none;
-}
-.deco-line {
-  width: 1px; background: rgba(245,237,216,0.15); position: absolute;
-}
-
-/* ─── STATUS COLORS ─── */
 /* ─── FOOTER ─── */
 .footer-social {
   width: 40px; height: 40px; border-radius: 0.5rem;
@@ -233,21 +231,37 @@ body {
   display: flex; align-items: center; justify-content: center;
   text-decoration: none; transition: background 0.2s ease;
 }
-.footer-social:hover { background: rgba(245,237,216,0.12); }
-.footer-link {
-  font-family: system-ui, sans-serif; color: rgba(245,237,216,0.45);
-  font-size: 0.88rem; text-decoration: none; transition: color 0.2s ease;
-  display: inline-flex; align-items: center;
-}
+.footer-social:hover { background: rgba(245,237,216,0.14); }
+.footer-link { font-family: system-ui, sans-serif; color: rgba(245,237,216,0.4); font-size: 0.875rem; text-decoration: none; transition: color 0.2s ease; display: inline-flex; align-items: center; }
 .footer-link:hover { color: rgba(245,237,216,0.85); }
 
 /* ─── DIFF CARDS ─── */
 .diff-card:hover { background: #1E0C0C !important; }
 
-/* ─── STATUS COLORS ─── */
-.status-pendente { color: #B45309; background: #FEF3C7; }
+/* ─── FLAG PILL ─── */
+.flag-pill {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.35rem 0.9rem; border-radius: 999px;
+  font-family: system-ui, sans-serif; font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  border: 1px solid rgba(245,237,216,0.15);
+  background: rgba(245,237,216,0.05);
+  color: rgba(245,237,216,0.7);
+}
+
+/* ─── STATUS ─── */
+.status-pendente   { color: #B45309; background: #FEF3C7; }
 .status-confirmado { color: #1D4ED8; background: #DBEAFE; }
 .status-preparando { color: #C2410C; background: #FFEDD5; }
-.status-saiu { color: #7C3AED; background: #EDE9FE; }
-.status-entregue { color: #15803D; background: #DCFCE7; }
-.status-cancelado { color: #DC2626; background: #FEE2E2; }
+.status-saiu       { color: #7C3AED; background: #EDE9FE; }
+.status-entregue   { color: #15803D; background: #DCFCE7; }
+.status-cancelado  { color: #DC2626; background: #FEE2E2; }
+
+/* ─── COUNTRY LINE ─── */
+.country-block {
+  display: flex; align-items: center; gap: 1rem;
+}
+.country-block::before,
+.country-block::after {
+  content: ''; flex: 1; height: 1px; background: rgba(245,237,216,0.1);
+}
