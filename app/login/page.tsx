@@ -24,7 +24,7 @@ export default function LoginPage() {
       toast.error('E-mail ou senha inválidos.')
     } else {
       toast.success('Bem-vindo(a) de volta!')
-      router.push('/clube')
+      router.push('/minha-conta')
     }
     setLoading(false)
   }

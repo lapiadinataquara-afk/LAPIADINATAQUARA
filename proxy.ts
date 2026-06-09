@@ -24,16 +24,18 @@ export async function proxy(request: NextRequest) {
 
   const { data: { user } } = await supabase.auth.getUser()
 
-  // Proteger rotas do admin
+  // Proteger rotas do admin e minha-conta
   if (request.nextUrl.pathname.startsWith('/adm')) {
-    if (!user) {
-      return NextResponse.redirect(new URL('/login', request.url))
-    }
+    if (!user) return NextResponse.redirect(new URL('/login', request.url))
+  }
+
+  if (request.nextUrl.pathname.startsWith('/minha-conta')) {
+    if (!user) return NextResponse.redirect(new URL('/login', request.url))
   }
 
   return supabaseResponse
 }
 
 export const config = {
-  matcher: ['/adm/:path*'],
+  matcher: ['/adm/:path*', '/minha-conta'],
 }

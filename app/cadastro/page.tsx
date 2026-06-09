@@ -61,7 +61,7 @@ function CadastroForm() {
       })
 
       toast.success('Conta criada! Bem-vindo(a) ao Clube La Piadina!')
-      router.push('/clube')
+      router.push('/minha-conta')
     }
     setLoading(false)
   }
