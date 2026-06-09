@@ -44,7 +44,13 @@ export default function MinhaContaPage() {
           .limit(5),
       ])
 
-      if (userRes.data) setUser(userRes.data)
+      if (userRes.data) {
+        setUser(userRes.data)
+      } else {
+        // Fallback: usa dados do Auth se não tem linha na tabela users ainda
+        const name = authUser.user_metadata?.name || authUser.email?.split('@')[0] || 'Cliente'
+        setUser({ id: authUser.id, name, email: authUser.email || '', points: 0, total_spent: 0 })
+      }
 
       if (ordersRes.data && ordersRes.data.length > 0) {
         const active = ordersRes.data.find(o => !['entregue', 'cancelado'].includes(o.status))
