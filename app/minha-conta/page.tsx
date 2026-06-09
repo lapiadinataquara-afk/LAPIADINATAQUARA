@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
-import { ShoppingBag, Star, Clock, MapPin, ChevronRight, LogOut, Package } from 'lucide-react'
+import { ShoppingBag, Star, Clock, ChevronRight, LogOut, Package } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import { formatCurrency, formatDate, getStatusLabel, getStatusColor } from '@/lib/utils'
 import toast from 'react-hot-toast'
@@ -32,8 +32,9 @@ export default function MinhaContaPage() {
 
   useEffect(() => {
     async function load() {
-      const { data: { user: authUser } } = await supabase.auth.getUser()
-      if (!authUser) { router.push('/login'); return }
+      try {
+      const { data: { user: authUser }, error: authError } = await supabase.auth.getUser()
+      if (authError || !authUser) { router.push('/login'); return }
 
       const [userRes, ordersRes] = await Promise.all([
         supabase.from('users').select('*').eq('id', authUser.id).single(),
@@ -60,6 +61,10 @@ export default function MinhaContaPage() {
       }
 
       setLoading(false)
+      } catch (e) {
+        console.error('minha-conta error:', e)
+        router.push('/login')
+      }
     }
     load()
   }, [])
