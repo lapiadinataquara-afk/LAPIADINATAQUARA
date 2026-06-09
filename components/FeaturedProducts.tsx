@@ -1,22 +1,27 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
-import { createClient } from '@/lib/supabase/server'
+import { createClient } from '@supabase/supabase-js'
 import { Product } from '@/lib/types'
 import { formatCurrency } from '@/lib/utils'
 import AddToCartButton from './AddToCartButton'
 
 async function getFeatured(): Promise<Product[]> {
   try {
-    const supabase = await createClient()
-    const { data } = await supabase
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    )
+    const { data, error } = await supabase
       .from('products')
       .select('*')
       .eq('active', true)
       .eq('featured', true)
       .limit(6)
+    if (error) console.error('FeaturedProducts error:', error)
     return data || []
-  } catch {
+  } catch (e) {
+    console.error('FeaturedProducts exception:', e)
     return []
   }
 }
